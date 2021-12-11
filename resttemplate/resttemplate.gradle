@@ -1,0 +1,21 @@
+subprojects {
+    group 'org.binchoo.study.spring.resttemplate'
+    apply plugin: 'java'
+
+    /*Task that copies all the dependencies under build/libs */
+    task copyDependencies(type: Copy) {
+        from configurations.compile
+        into 'build/libs'
+    }
+
+    dependencies {
+        compile web.httpclient
+        compile spring.data, spring.webmvc, hibernate.jpaApi
+        compile misc.slf4jJcl, misc.logback, misc.jacksonDatabind, misc.joda, misc.jacksonJoda, misc.lombok
+        annotationProcessor misc.lombok
+
+        testCompile spring.test, testing.junit5Engine, testing.junit5Runner
+        testAnnotationProcessor misc.lombok
+    }
+}
+
