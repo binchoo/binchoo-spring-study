@@ -16,6 +16,7 @@ subprojects {
         annotationProcessor misc.lombok
 
         testCompile spring.test, testing.junit5Engine, testing.junit5Runner
+        testCompile 'org.assertj:assertj-core:3.6.2'
         testAnnotationProcessor misc.lombok
     }
 }

@@ -1,8 +1,7 @@
-package org.binchoo.study.spring.multipart.profileservice;
+package org.binchoo.study.spring.multipart.profileservice.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.binchoo.study.spring.multipart.profileservice.config.WebConfig;
-import org.binchoo.study.spring.multipart.profileservice.controller.UserProfileController;
 import org.binchoo.study.spring.multipart.profileservice.entity.UserProfile;
 import org.binchoo.study.spring.multipart.profileservice.service.UserProfileService;
 import org.h2.util.StringUtils;

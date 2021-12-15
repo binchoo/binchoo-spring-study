@@ -1,6 +1,5 @@
 package org.binchoo.study.spring.multipart.profileservice.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.binchoo.study.spring.multipart.profileservice.config.WebConfig;
@@ -9,6 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.mock.web.MockMultipartHttpServletRequest;
 import org.springframework.test.context.junit.jupiter.web.SpringJUnitWebConfig;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
@@ -19,23 +19,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringJUnitWebConfig(classes = {WebConfig.class})
-class MultipartPracticeControllerTests {
+public class MultipartFilePracticeControllerTests {
 
-    final static String URL = "/multipart";
+    final static String URL = "/multipartfile";
 
     MockMvc mvc;
 
     @Autowired
-    MultipartPracticeController controller;
-
-    @Autowired
-    ObjectMapper objectMapper;
+    MultipartFilePracticeController controller;
 
     UserVO testUserVo;
     MockMultipartFile singleImage;
@@ -46,7 +44,7 @@ class MultipartPracticeControllerTests {
         this.mvc = MockMvcBuilders.standaloneSetup(controller).build();
 
         String[] fileNames = {"image1.png", "image2.png", "image3.png"};
-        byte[] fileBytes = new byte[]{-1, -1, -1, -1, -1, -1};
+        byte[] fileBytes = "이미지 내용입니다.".getBytes();
 
         this.multiImages = Arrays.stream(fileNames)
                 .map(it-> new MockMultipartFile("file", it, "image/png", fileBytes))
@@ -70,7 +68,7 @@ class MultipartPracticeControllerTests {
                 .andReturn();
         MultipartHttpServletRequest request = (MultipartHttpServletRequest) result.getRequest();
         // then
-        assertEquals(0, request.getMultiFileMap().size());
+        assertNull(request.getPart("file"));
     }
 
     @DisplayName("객체와 한 이미지를 멀티파트 전송했을 때")
@@ -87,10 +85,9 @@ class MultipartPracticeControllerTests {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andReturn();
-        MultipartHttpServletRequest request = (MultipartHttpServletRequest) result.getRequest();
+        MultipartHttpServletRequest request = (MockMultipartHttpServletRequest) result.getRequest();
         // then
-        assertEquals(1, request.getMultiFileMap().size());
-        assertEquals(1, request.getMultiFileMap().get("file").size());
+        assertNotNull(request.getPart("file"));
     }
 
     @DisplayName("객체와 여러 이미지를 멀티파트 전송했을 때")
@@ -109,8 +106,7 @@ class MultipartPracticeControllerTests {
                 .andReturn();
         MultipartHttpServletRequest request = (MultipartHttpServletRequest) result.getRequest();
         // then
-        assertEquals(1, request.getMultiFileMap().size());
-        assertEquals(3, request.getMultiFileMap().get("file").size());
+        assertNotNull(request.getPart("file"));
     }
 
     @Getter

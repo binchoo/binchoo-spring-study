@@ -1,6 +1,6 @@
 ext {
 	// 스프링 라이브러리
-	springVersion = '5.1.8.RELEASE'
+	springVersion = '5.3.2'
 	bootVersion = '2.1.6.RELEASE'
 	springDataVersion = '2.1.5.RELEASE'
 	springAmqpVersion = '2.1.0.RELEASE'
