@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 @Service
 public class MovieClientService implements IMovieClientService {
@@ -36,11 +38,11 @@ public class MovieClientService implements IMovieClientService {
     @Override
     public List<Movie> readMovie(Long id, String name) {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(URL_READ_MOVIE);
-        if (id != null)
-            uriBuilder.queryParam("id", id);
-        if (name != null)
-            uriBuilder.queryParam("name", name);
-        MovieResponse response = restTemplate.getForObject(uriBuilder.toUriString(), MovieResponse.class);
+        Optional.ofNullable(id).ifPresent(it-> uriBuilder.queryParam("id", it));
+        Optional.ofNullable(name).ifPresent(it-> uriBuilder.queryParam("name", name));
+
+        String url = uriBuilder.build().toUriString(); // build string without encoding
+        MovieResponse response = restTemplate.getForObject(url, MovieResponse.class); // because restTemplate will encodes the url
         return Optional.of(response.getResult())
                 .orElseThrow(InternalError::new);
     }

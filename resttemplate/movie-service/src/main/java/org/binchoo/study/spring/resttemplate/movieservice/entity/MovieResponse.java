@@ -13,9 +13,9 @@ public class MovieResponse {
 
     String message;
 
-    Integer code;
-
     String resultType;
+
+    Integer code;
 
     List<Movie> result;
 }

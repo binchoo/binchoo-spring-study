@@ -24,24 +24,17 @@ public class MovieClientServiceTest {
     }
 
     @Test
-    void readMovieList_returns() {
+    void readMovieList() {
         List<Movie> movies = movieClientService.readMovieList();
-        for (Movie it : movies) {
-            System.out.println(it);
-        }
+        assert(movies.size() > 0);
     }
 
     @Test
-    void readMovie_returns() {
-        List<Movie> movies1 = movieClientService.readMovie(1L, "°¡³ª´Ù");
-        List<Movie> movies2 = movieClientService.readMovie(1L, "²Û");
-        for (Movie it : movies1) {
-            System.out.println(it);
-        }
-        for (Movie it : movies2) {
-            System.out.println(it);
-        }
+    void readMovie() {
+        List<Movie> movies1 = movieClientService.readMovie(1L, "ëª°ë£¨");
+        List<Movie> movies2 = movieClientService.readMovie(null, "ê¾¼");
         assertEquals(movies1.size(), movies2.size());
+
         Movie movie1 = movies1.get(0);
         Movie movie2 = movies2.get(0);
         assertEquals(movie1, movie2);

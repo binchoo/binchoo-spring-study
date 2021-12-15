@@ -9,9 +9,10 @@ subprojects {
     }
 
     dependencies {
-        compile web.httpclient
-        compile spring.data, spring.web, hibernate.jpaApi
-        compile misc.slf4jJcl, misc.logback, misc.jacksonDatabind, misc.joda, misc.jacksonJoda, misc.lombok
+        compile spring.webmvc, spring.data, hibernate.jpaApi, hibernate.em, hibernate.tx, hibernate.validator
+        compile web.jxSevelet, web.mustache
+        compile db.h2
+        compile misc.slf4jJcl, misc.logback, misc.joda, misc.lombok, misc.yasson, misc.validation, misc.jacksonDatabind
         annotationProcessor misc.lombok
 
         testCompile spring.test, testing.junit5Engine, testing.junit5Runner

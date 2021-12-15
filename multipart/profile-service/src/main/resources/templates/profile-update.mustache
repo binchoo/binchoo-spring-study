@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Update: {{profile.id}}</title>
+</head>
+<body>
+    <div class="profile">
+        {{#profile}}
+        <form action="/profile/{{id}}" method="post" enctype="multipart/form-data">
+            <img src="/profile/{{id}}/img" />
+            <label for="file">Upload a photo</label>
+            <input type="file" name="file"><br><br>
+            <table>
+                <tr>
+                    <td><h2>ID</h2></td>
+                    <td>{{id}}</td>
+                </tr>
+                <tr>
+                    <td><h2>NAME</h2></td>
+                    <td><input type="text" name="name" value="{{name}}"></td>
+                </tr>
+                <tr>
+                    <td><h2>PHONE NUMBER</h2></td>
+                    <td><input type="text" name="phoneNumber" value="{{phoneNumber}}"></td>
+                </tr>
+                <tr>
+                    <td><h2>BIRTHDATE</h2></td>
+                    <td><input type="date" name="birthDate" value="{{birthDate}}"></td>
+                </tr>
+            </table>
+            <input type="submit" value="수정완료" />
+        </form>
+        {{/profile}}
+    </div>
+
+    <div class="btn">
+        <a href="/profile/{{profile.id}}">뒤로가기</a>
+    </div>
+</body>
+</html>

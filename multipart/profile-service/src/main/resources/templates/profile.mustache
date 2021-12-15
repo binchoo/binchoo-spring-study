@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile: {{profile.id}}</title>
+</head>
+<body>
+    <div class="profile">
+        {{#profile}}
+        <img src="/profile/{{profile.id}}/img" />
+        <table>
+            <tr>
+                <td><h2>ID</h2></td>
+                <td>{{id}}</td>
+            </tr>
+            <tr>
+                <td><h2>NAME</h2></td>
+                <td>{{name}}</td>
+            </tr>
+            <tr>
+                <td><h2>PHONE NUMBER</h2></td>
+                <td>{{phoneNumber}}</td>
+            </tr>
+            <tr>
+                <td><h2>BIRTHDATE</h2></td>
+                <td>{{birthDate}}</td>
+            </tr>
+        </table>
+        {{/profile}}
+    </div>
+
+    <div class="btn">
+        <a href="/profile/{{profile.id}}?update">수정하기</a>
+    </div>
+</body>
+</html>

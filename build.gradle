@@ -33,6 +33,7 @@ ext {
 	httpclientVersion = '4.5.3'
 	poiVersion = '3.16'
 	tilesVersion = '3.0.7'
+	mustacheVersion = '1.4.0'
 	bootstrapVersion = '3.3.7-1'
 	thymeSecurityVersion = '3.0.2.RELEASE'
 	jQueryVersion = '3.2.1'
@@ -53,6 +54,7 @@ ext {
 
 	spring = [
 			context           : "org.springframework:spring-context:$springVersion",
+			web				  : "org.springframework:spring-web:$springVersion",
 			webmvc            : "org.springframework:spring-webmvc:$springVersion",
 			aop               : "org.springframework:spring-aop:$springVersion",
 			aspects           : "org.springframework:spring-aspects:$springVersion",
@@ -151,6 +153,7 @@ ext {
 	]
 
 	web = [
+			mustache	 : "org.springframework.boot:spring-boot-starter-mustache:$bootVersion",
 			tiles        : "org.apache.tiles:tiles-jsp:$tilesVersion",
 			jstl         : "jstl:jstl:1.2",
 			bootstrap    : "org.webjars:bootstrap:$bootstrapVersion",
@@ -161,6 +164,7 @@ ext {
 			httpclient   : "org.apache.httpcomponents:httpclient:$httpclientVersion",
 			websocket    : "javax.websocket:javax.websocket-api:1.1",
 			servlet      : "javax:javaee-web-api:8.0",
+			jxSevelet	 : "javax.servlet:javax.servlet-api:4.0.1"
 	]
 
 	react = [
