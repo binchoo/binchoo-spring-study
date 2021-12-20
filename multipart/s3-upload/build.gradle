@@ -1,0 +1,10 @@
+jar {
+    manifest {
+        attributes(
+                "Created-By": "jbinchoo",
+                "Specification-Title": "Pro Spring 5",
+                "Main-Class" : "", // TODO: set main class
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' ')
+        )
+    }
+}

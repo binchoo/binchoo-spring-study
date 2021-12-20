@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.2/stomp.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script language="javascript" type="text/javascript">
+        var stomp;
+        jQuery(function ($) {
+            function disable(...ids) {
+                ids.forEach((id)=> $(id).attr('disabled', true));
+            }
+
+            function enable(...ids) {
+                ids.forEach((id)=> $(id).attr('disabled', false));
+            }
+
+            function writeMessage(frame) {
+                message = frame.body;
+                $('#messageOutput').append('>' + message + '\n');
+            }
+
+            connCallback = () => {
+                stomp.subscribe('/chatroom/' + $('#target').val(), writeMessage);
+                console.log('stomp에 연결하고 채팅방을 구독했어요.');
+                disable('#target', '#connect');
+            };
+
+            errCallback = () => {
+                console.error(error.headers.message);
+            }
+
+            $('#connect').click(function doConnect() {
+                    stomp = Stomp.over(new SockJS("/ws"));
+                    stomp.connect("guest", "guest", connCallback, errCallback);
+            });
+
+            $('#disconnect').click(function() {
+                    if (typeof stomp != 'undefined') {
+                        stomp.disconnect(() => {
+                            console.log('stomp 연결을 해제했습니다.');
+                            enable('#target', '#connect');
+                        });
+                        stomp = undefined;
+                    } else {
+                        console.log('연결이 없는 상태입니다.');
+                    }
+            });
+
+            $('#send').click(function () {
+                    if (typeof stomp != 'undefined') {
+                        target = $('#target').val();
+                        stomp.send("/inbox/" + target, {}, $('#message').val());
+                        $('#message').val('')
+                    } else {
+                        alert('연결되지 않았어요.');
+                    }
+            });
+        });
+    </script>
+</head>
+<body>
+    <br/>채팅방 ID:
+    <input id="target" type="text" size="10" value="cr1" />
+    <button id="connect">채팅방 접속</button>
+    <button id="disconnect">나가기</button>
+    <br/>
+    <br/>메시지:
+    <input id="message" value="" />
+    <button id="send">전송</button>
+    <br/>채팅창:
+    <pre><textarea id="messageOutput" rows="10" cols="50"></textarea></pre>
+</body>
+</html>

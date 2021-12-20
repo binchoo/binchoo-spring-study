@@ -4,6 +4,9 @@ include 'resttemplate:hello-world'
 include 'resttemplate:movie-service'
 
 include 'multipart:profile-service'
+include 'multipart:s3-upload'
+
+include 'websocket:mapping'
 
 println(' 이 프로젝트는 binchoo가 spring 코드 작성을 연습하는 장소입니다.')
 
@@ -14,4 +17,3 @@ rootProject.children.each { project ->
 	assert project.buildFile.exists()
 	assert project.buildFile.isFile()
 }
-
