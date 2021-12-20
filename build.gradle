@@ -68,6 +68,7 @@ ext {
 			oxm               : "org.springframework:spring-oxm:$springVersion",
 			securityWeb       : "org.springframework.security:spring-security-web:$springSecurityVersion",
 			securityConfig    : "org.springframework.security:spring-security-config:$springSecurityVersion",
+			securityMessaging : "org.springframework.security:spring-security-messaging:$springSecurityVersion",
 			securityTaglibs   : "org.springframework.security:spring-security-taglibs:$springSecurityVersion",
 			rabbit            : "org.springframework.amqp:spring-rabbit:$springAmqpVersion",
 			springSecurityTest: "org.springframework.security:spring-security-test:$springSecurityVersion",

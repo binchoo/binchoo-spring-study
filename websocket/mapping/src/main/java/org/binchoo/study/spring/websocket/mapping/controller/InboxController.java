@@ -8,6 +8,10 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
+import java.security.Principal;
+import java.util.HashMap;
+import java.util.Map;
+
 @Controller
 public class InboxController {
 
@@ -15,9 +19,18 @@ public class InboxController {
     SimpMessagingTemplate simpMessagingTemplate;
 
     @MessageMapping("/{chatroom}")
-    public void broadcastUserMessage(@Header("simpSessionId") String sessionId,
-                @DestinationVariable("chatroom") String chatRoomName, @Payload String body) {
+    public void broadcastUserMessage(@Header("simpSessionId") String sessionId, Principal principal,
+                @DestinationVariable("chatroom") String chatRoomName, @Payload String message) {
+        String userDisplayName = sessionId;
         String chatRoomMessageBrokerDestination = "/chatroom/" + chatRoomName;
-        simpMessagingTemplate.convertAndSend(chatRoomMessageBrokerDestination, sessionId + ": " + body);
+
+        Map<String, Object> headers = new HashMap<>();
+        headers.put("content-type", "text/plain");
+
+        if (principal != null)
+            userDisplayName = principal.getName() + "(" + sessionId + ")";
+
+        simpMessagingTemplate.convertAndSend(chatRoomMessageBrokerDestination,
+                userDisplayName + ": " + message, headers);
     }
 }

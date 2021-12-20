@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
+    <title>웹 소켓 채팅</title>
+</head>
+<body>
+    <section class="hero is-primary">
+        <div class="hero-body">
+                <span class="tag is-black">SpringBoot</span>
+                <span class="tag is-dark">WebSocket</span>
+                <span class="tag is-white">STOMP</span>
+                <span class="tag is-link">SpringSecurity</span>
+                <span class="tag is-primary is-light">BULMA</span>
+            <p class="title mt-4">WebSocket Chat</p>
+            <p class="subtitle">Demo App Applying Spring Security to STOMP</p>
+            <a class="button is-rounded" href="/logout">
+                <span>Logout</span>
+                <span class="icon is-small">
+                <i class="fas fa-times"></i>
+                </span>
+            </a>
+        </div>
+    </section>
+
+    <div class="container ml-3 mt-3">
+        <div class="field is-horizontal">
+            <div class="field has-addons">
+                <div class="control">
+                    <a class="button is-static">Chatroom's Name</a>
+                </div>
+                <div class="control">
+                    <input class="input" id="target" type="text" size="10" value="cr1">
+                </div>
+                <div class="control">
+                    <button class="button is-info" id="connect">Connect</button>
+                </div>
+                <div class="control">
+                    <button class="button is-warning" id="disconnect" disabled>Disconnect</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="field is-horizontal">
+            <div class="field has-addons">
+                <div class="control">
+                    <input class="input" id="message" type="text" placeholder="Input your message." size="100">
+                </div>
+                <div class="control">
+                    <button class="button is-info" id="send">Transfer</button>
+                </div>
+            </div>
+        </div>
+        <textarea class="textarea is-info is-medium" id="messageOutput" placeholder="No messages." readonly></textarea>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.2/stomp.min.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="/js/stomp.client.js"></script>
+
+</body>
+</html>

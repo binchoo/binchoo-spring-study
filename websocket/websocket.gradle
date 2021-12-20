@@ -10,7 +10,7 @@ subprojects {
 
     dependencies {
         compile boot.starterWeb
-        compile spring.webSocket, spring.messaging
+        compile spring.webSocket, spring.messaging, spring.securityWeb, spring.securityConfig, spring.securityMessaging
         compile web.tomcatWsApi, web.tomcatWsEmbed
         compile misc.slf4jJcl, misc.logback, misc.lombok
         annotationProcessor misc.lombok
