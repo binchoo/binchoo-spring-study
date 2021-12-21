@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * packageName : org.binchoo.study.spring.websocket.mapping.controller
+ * packageName : org.binchoo.study.spring.websocket.securitychat.controller
  * fileName : CsrfController
  * author : wnwoq
  * date : 2021-12-21
