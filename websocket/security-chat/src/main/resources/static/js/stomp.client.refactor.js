@@ -55,7 +55,7 @@ var app = {
         stomp.connect("guest", "guest", () => {
             stomp.subscribe('/chatroom/' + $('#target').val(), display.show_frame)
             display.log('stomp에 연결하고 채팅방을 구독했어요.')
-            display.enable('#disconnect')
+            display.enable('#disconnect', '#message')
             display.disable('#target', '#connect')
         }, (error) => {
             if (typeof error != undefined)
@@ -70,7 +70,7 @@ var app = {
             stomp.disconnect(() => {
                 display.log('stomp 연결을 해제했습니다.');
                 display.enable('#target', '#connect');
-                display.disable('#disconnect');
+                display.disable('#disconnect', '#message');
             });
             stomp = undefined;
         } else {
