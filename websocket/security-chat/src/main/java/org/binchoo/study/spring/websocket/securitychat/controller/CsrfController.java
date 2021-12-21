@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * packageName : org.binchoo.study.spring.websocket.securitychat.controller
  * fileName : CsrfController
- * author : wnwoq
+ * author : jbinchoo
  * date : 2021-12-21
  * description : CSRF 토큰을 제공하는 컨트롤러
  */
