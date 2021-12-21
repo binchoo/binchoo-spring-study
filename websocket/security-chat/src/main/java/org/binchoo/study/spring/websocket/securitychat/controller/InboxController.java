@@ -1,4 +1,4 @@
-package org.binchoo.study.spring.websocket.mapping.controller;
+package org.binchoo.study.spring.websocket.securitychat.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;

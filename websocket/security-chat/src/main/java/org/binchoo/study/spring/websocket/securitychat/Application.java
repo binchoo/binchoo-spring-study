@@ -1,4 +1,4 @@
-package org.binchoo.study.spring.websocket.mapping;
+package org.binchoo.study.spring.websocket.securitychat;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

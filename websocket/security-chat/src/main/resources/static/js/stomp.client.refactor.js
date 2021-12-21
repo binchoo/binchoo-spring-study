@@ -53,12 +53,16 @@ var app = {
     connect: function() {
         stomp = Stomp.over(new SockJS("/ws"))
         stomp.connect("guest", "guest", () => {
-            stomp.subscribe('/chatroom/' + $('#target').val(), display.show_frame);
-            display.log('stomp에 연결하고 채팅방을 구독했어요.');
-            display.enable('#disconnect');
-            display.disable('#target', '#connect');
+            stomp.subscribe('/chatroom/' + $('#target').val(), display.show_frame)
+            display.log('stomp에 연결하고 채팅방을 구독했어요.')
+            display.enable('#disconnect')
+            display.disable('#target', '#connect')
         }, (error) => {
-            console.error(error.headers.message);
+            if (typeof error != undefined)
+                display.log(error.headers.message)
+            display.enable('#target', '#connect')
+            display.disable('#disconnect')
+            stomp = undefined
         })
     },
     disconnect: function() {

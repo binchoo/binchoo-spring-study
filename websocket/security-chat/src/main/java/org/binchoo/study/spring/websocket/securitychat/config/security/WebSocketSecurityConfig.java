@@ -1,4 +1,4 @@
-package org.binchoo.study.spring.websocket.mapping.config.security;
+package org.binchoo.study.spring.websocket.securitychat.config.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.messaging.MessageSecurityMetadataSourceRegistry;
