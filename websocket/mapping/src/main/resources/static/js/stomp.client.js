@@ -1,5 +1,6 @@
 var stomp;
 jQuery(function ($) {
+
     function disable(...ids) {
         ids.forEach((id)=> $(id).attr('disabled', true));
     }
