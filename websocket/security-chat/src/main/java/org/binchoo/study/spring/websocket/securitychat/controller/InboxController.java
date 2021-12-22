@@ -9,8 +9,6 @@ import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 
 import java.security.Principal;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 public class InboxController {
@@ -24,13 +22,10 @@ public class InboxController {
         String userDisplayName = sessionId;
         String chatRoomMessageBrokerDestination = "/chatroom/" + chatRoomName;
 
-        Map<String, Object> headers = new HashMap<>();
-        headers.put("content-type", "text/plain");
-
         if (principal != null)
             userDisplayName = principal.getName() + "(" + sessionId + ")";
 
         simpMessagingTemplate.convertAndSend(chatRoomMessageBrokerDestination,
-                userDisplayName + ": " + message, headers);
+                userDisplayName + ": " + message);
     }
 }
