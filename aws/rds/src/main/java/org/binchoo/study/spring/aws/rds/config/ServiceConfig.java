@@ -55,7 +55,7 @@ public class ServiceConfig {
         Properties props = new Properties();
         props.put("hibernate.hbm2ddl.auto", "create-drop");
         props.put("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
-        props.put("hibernate.show_sql", true);
+        props.put("hibernate.show_sql", false);
         return props;
     }
 }

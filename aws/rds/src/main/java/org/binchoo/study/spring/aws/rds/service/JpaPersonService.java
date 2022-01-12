@@ -25,6 +25,12 @@ public class JpaPersonService implements PersonService {
         return repository.findAll();
     }
 
+    @Transactional(readOnly = true)
+    @Override
+    public Person findById(Long id) {
+        return repository.findById(id).get();
+    }
+
     @Transactional
     @Override
     public void save(Person person) {

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -27,7 +28,12 @@ public class PersonController {
         return ResponseEntity.ok(service.findAll());
     }
 
-    @GetMapping("/persons/add/{firstName}/{lastName}")
+    @GetMapping("/person/{id}")
+    public ResponseEntity getPerson(@PathVariable(name="id") Long id) {
+        return ResponseEntity.ok(service.findById(id));
+    }
+
+    @PostMapping("/person")
     public ResponseEntity addPerson(@PathVariable(name="firstName") String firstName,
                                     @PathVariable(name="lastName") String lastName) {
         Person p = Person.builder().firstName(firstName).lastName(lastName).build();
