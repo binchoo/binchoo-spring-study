@@ -1,0 +1,22 @@
+subprojects {
+    group 'org.binchoo.study.spring.aws'
+    apply plugin: 'java'
+
+    /*Task that copies all the dependencies under build/libs */
+    task copyDependencies(type: Copy) {
+        from configurations.compile
+        into 'build/libs'
+    }
+
+    dependencies {
+        compile boot.starterWeb, boot.starterJpa
+        compile db.mysql
+        compile aws.jdbc
+        compile misc.slf4jJcl, misc.logback, misc.lombok
+        annotationProcessor misc.lombok
+
+        testCompile boot.starterTest, testing.junit5Engine, testing.junit5Runner
+        testAnnotationProcessor misc.lombok
+    }
+}
+

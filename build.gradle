@@ -7,6 +7,7 @@ ext {
 	springSecurityVersion = '5.1.4.RELEASE'
 	springBatchVersion = '4.1.1.RELEASE'
 	springIntegrationVersion = '5.1.2.RELEASE'
+	springCloudAwsVersion = '2.3.0'
 
 	// 로그 라이브러리
 	slf4jVersion = '1.7.25'
@@ -180,6 +181,10 @@ ext {
 			dbcp  : "commons-dbcp:commons-dbcp:1.4",
 			h2    : "com.h2database:h2:$h2Version",
 			hsqldb: "org.hsqldb:hsqldb:2.4.0"
+	]
+
+	aws = [
+	        jdbc  :	"io.awspring.cloud:spring-cloud-aws-jdbc:$springCloudAwsVersion",
 	]
 }
 
