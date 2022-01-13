@@ -6,7 +6,7 @@
 - [스프링 Messaging] [웹소켓 요청은 누가 핸들링 하나요](https://binchoo.tistory.com/55)
 - [스프링 Security] [웹소켓 요청 보호하기]()
   ![Demo App Cover](./document/images/websocket_security_demo.png)
-- [스프링 Cloud AWS] RDS Read-Replica 지원 JDBC
+- [스프링 Cloud AWS] [RDS Read-Replica Spring Cloud AWS 연동](https://binchoo.tistory.com/56)
   ![Demo RDS Monitoring](./document/images/aws_rds_readreplica_monitoring.png)
 ## 참고도서 (006987) 
 
