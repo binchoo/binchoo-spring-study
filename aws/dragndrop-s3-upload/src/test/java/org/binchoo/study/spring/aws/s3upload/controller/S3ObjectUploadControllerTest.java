@@ -77,9 +77,7 @@ class S3ObjectUploadControllerTest {
         assertThrows(IllegalArgumentException.class, ()-> {
             mockMvc.perform(multipart(REQUEST_URL)
                     .file(null)
-                    .with(csrf()))
-                    .andExpect(status().isInternalServerError())
-                    .andDo(print());
+                    .with(csrf()));
         });
     }
 
