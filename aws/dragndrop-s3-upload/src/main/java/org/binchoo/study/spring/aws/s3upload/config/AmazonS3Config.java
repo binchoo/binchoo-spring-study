@@ -24,7 +24,7 @@ public class AmazonS3Config {
     AmazonS3 amazonS3() throws IOException {
         AmazonS3ClientBuilder clientBuilder = AmazonS3ClientBuilder.standard();
         clientBuilder.setCredentials(credentialsProvider());
-        clientBuilder.setRegion("ap-northeast-1");
+        //clientBuilder.setRegion("ap-northeast-1");
         return clientBuilder.build();
     }
 
