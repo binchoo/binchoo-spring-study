@@ -3,6 +3,7 @@ package org.binchoo.study.spring.aws.s3upload.service;
 import org.binchoo.study.spring.aws.s3upload.dto.S3ObjectUrlDto;
 
 import java.io.File;
+import java.util.Optional;
 
 /**
  * packageName : org.binchoo.study.spring.aws.s3upload.service
@@ -12,5 +13,5 @@ import java.io.File;
  * description :
  */
 public interface S3UploadService {
-    S3ObjectUrlDto uploadObject(File file, String userName);
+    Optional<S3ObjectUrlDto> uploadObject(File file, String userName);
 }

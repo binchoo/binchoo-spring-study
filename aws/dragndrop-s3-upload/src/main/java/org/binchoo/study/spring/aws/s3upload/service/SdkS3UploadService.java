@@ -8,6 +8,7 @@ import org.binchoo.study.spring.aws.s3upload.dto.S3ObjectUrlDto;
 import org.binchoo.study.spring.aws.s3upload.service.utils.S3ObjectKeyUtils;
 
 import java.io.File;
+import java.util.Optional;
 
 /**
  * packageName : org.binchoo.study.spring.aws.s3upload.service
@@ -31,16 +32,17 @@ public class SdkS3UploadService implements S3UploadService {
     }
 
     @Override
-    public S3ObjectUrlDto uploadObject(File file, String userName) {
+    public Optional<S3ObjectUrlDto> uploadObject(File file, String userName) {
         final String key = S3ObjectKeyUtils.keyFromUserName(userName, file);
         final PutObjectRequest request = new PutObjectRequest(bucketName, key, file).withMetadata(aes256metadata);
+        final PutObjectResult result = amazonS3.putObject(request);
 
-        PutObjectResult result = amazonS3.putObject(request);
+        S3ObjectUrlDto dto = null;
         if (result != null) {
-            String objectUrl = amazonS3.getUrl(bucketName, key).toString();
-            return S3ObjectUrlDto.builder().objectUrl(objectUrl).build();
+            final String objectUrl = amazonS3.getUrl(bucketName, key).toString();
+            dto = S3ObjectUrlDto.builder().objectUrl(objectUrl).build();
         }
-        return null;
+        return Optional.ofNullable(dto);
     }
 
     public void setBucketName(String bucketName) {

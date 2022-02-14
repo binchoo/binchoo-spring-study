@@ -14,6 +14,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
@@ -53,7 +55,7 @@ class S3ObjectUploadControllerTest {
     public void init() {
         s3UploadService = mock(S3UploadService.class);
         when(s3UploadService.uploadObject(any(), any())).thenReturn(
-                S3ObjectUrlDto.builder().objectUrl(MOCK_RETURN_URL).build());
+                Optional.of(S3ObjectUrlDto.builder().objectUrl(MOCK_RETURN_URL).build()));
 
         controller.setUploadService(s3UploadService);
         multipartFile = new MockMultipartFile("file",

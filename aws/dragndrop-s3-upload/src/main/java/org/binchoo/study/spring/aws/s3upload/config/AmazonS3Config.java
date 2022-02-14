@@ -16,6 +16,7 @@ import java.io.IOException;
  * author : jbinchoo
  * date : 2022-02-14
  * description :
+ * issues : 리젼은 S3 버킷을 찾는 데에 역할이 없다.
  */
 @Configuration
 public class AmazonS3Config {

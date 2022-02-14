@@ -11,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
@@ -30,7 +31,6 @@ class SdkS3UploadServiceTest {
     AmazonS3 amazonS3;
 
     SdkS3UploadService sdkS3UploadService;
-
     File testFile;
 
     @BeforeEach
@@ -42,9 +42,11 @@ class SdkS3UploadServiceTest {
 
     @Test
     void uploadJpgObject()  {
-        S3ObjectUrlDto dto = sdkS3UploadService.uploadObject(testFile, "binchoo");
-        assertThat(dto).isNotNull();
-        assertThat(dto.getObjectUrl()).contains("binchoo");
-        System.out.println("url =" + dto.getObjectUrl());
+        Optional<S3ObjectUrlDto> dto = sdkS3UploadService.uploadObject(testFile, "binchoo");
+        assertThat(dto.isPresent());
+        dto.ifPresent(it-> {
+            assertThat(it.getObjectUrl()).contains("binchoo");
+            System.out.println("url =" + it.getObjectUrl());
+        });
     }
 }

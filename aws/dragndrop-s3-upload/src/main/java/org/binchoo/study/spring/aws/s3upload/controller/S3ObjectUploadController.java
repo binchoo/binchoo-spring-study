@@ -17,6 +17,7 @@ import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Optional;
 
 /**
  * packageName : org.binchoo.study.spring.aws.s3upload.controller
@@ -38,10 +39,10 @@ public class S3ObjectUploadController {
     @PostMapping("/s3-upload")
     public ResponseEntity<S3ObjectUrlDto> s3ObjectUpload(@RequestPart("file") @NotNull MultipartFile part,
                                                          @AuthenticationPrincipal Principal principal) throws IOException {
-        S3ObjectUrlDto dto = uploadService.uploadObject(convertMultipartToFile(part), principal.getName());
-        if (dto != null)
-            return new ResponseEntity<>(dto, HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.OK);
+        Optional<S3ObjectUrlDto> optional = uploadService.uploadObject(convertMultipartToFile(part), principal.getName());
+        if (optional.isPresent())
+            return new ResponseEntity<>(optional.get(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     private File convertMultipartToFile(MultipartFile part) throws IOException {
