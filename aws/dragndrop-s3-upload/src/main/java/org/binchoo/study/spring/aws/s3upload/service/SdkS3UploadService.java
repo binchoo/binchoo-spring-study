@@ -21,9 +21,10 @@ import java.util.Optional;
 
 public class SdkS3UploadService implements S3UploadService {
 
-    private String bucketName;
     private final AmazonS3 amazonS3;
     private final ObjectMetadata aes256metadata;
+
+    private String bucketName;
 
     public SdkS3UploadService(AmazonS3 amazonS3) {
         this.amazonS3 = amazonS3;
@@ -31,8 +32,15 @@ public class SdkS3UploadService implements S3UploadService {
         aes256metadata.setSSEAlgorithm(ObjectMetadata.AES_256_SERVER_SIDE_ENCRYPTION);
     }
 
+    public SdkS3UploadService(AmazonS3 amazonS3, String bucketName) {
+        this(amazonS3);
+        this.bucketName = bucketName;
+    }
+
     @Override
     public Optional<S3ObjectUrlDto> uploadObject(File file, String userName) {
+        assert(bucketName != null);
+
         final String key = S3ObjectKeyUtils.keyFromUserName(userName, file);
         final PutObjectRequest request = new PutObjectRequest(bucketName, key, file).withMetadata(aes256metadata);
         final PutObjectResult result = amazonS3.putObject(request);

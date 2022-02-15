@@ -24,7 +24,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) {
         try {
             auth.inMemoryAuthentication()
-                    .withUser("binchoo").password("1234").roles("USER");
+                    .withUser("binchoo").password("{noop}1234").roles("USER");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,12 +35,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().csrfTokenRepository(tokenRepository())
         .and().authorizeRequests()
-            .antMatchers("/*").authenticated()
+            .antMatchers("/index", "/put*").authenticated()
         .and().formLogin()
-            .loginPage("/login")
-            .loginProcessingUrl("/doLogin")
-            .defaultSuccessUrl("/")
-            .failureUrl("/login").permitAll()
+            .loginPage("/login").permitAll()
+            .loginProcessingUrl("/doLogin").permitAll()
+            .defaultSuccessUrl("/index")
+            .failureUrl("/")
         .and().logout()
             .logoutUrl("/logout")
             .logoutSuccessUrl("/");
@@ -48,7 +48,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public CsrfTokenRepository tokenRepository() {
-        CookieCsrfTokenRepository repository = new CookieCsrfTokenRepository();
-        return repository;
+        return CookieCsrfTokenRepository.withHttpOnlyFalse();
     }
 }
