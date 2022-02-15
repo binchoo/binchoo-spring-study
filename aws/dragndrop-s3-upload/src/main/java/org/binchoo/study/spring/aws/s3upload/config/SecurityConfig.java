@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .csrf().csrfTokenRepository(tokenRepository())
         .and().authorizeRequests()
-            .antMatchers("/index", "/put*").authenticated()
+            .antMatchers("/index", "/s3*").authenticated()
         .and().formLogin()
             .loginPage("/login").permitAll()
             .loginProcessingUrl("/doLogin").permitAll()
